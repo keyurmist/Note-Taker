@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const notes = require("../Develop/db/db.json");
 
 api.get("/notes", (req, res) => {
-  res.json("../Develop/db/db.json");
+  res.sendFile(path.join(__dirname, notes));
 });
 
 api.post("/notes", (req, res) => {
