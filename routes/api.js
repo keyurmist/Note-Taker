@@ -2,10 +2,10 @@ const api = require("express").Router();
 const path = require("path");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
-const notes = require("../db/db.json");
+const db = require("../db/db.json");
 
 api.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, notes));
+  res.json(notes);
 });
 
 api.post("/notes", (req, res) => {
@@ -14,7 +14,7 @@ api.post("/notes", (req, res) => {
   const newNote = req.body;
   newNote.id = uuidv4();
 
-  let data = JSON.parse(fs.readFileSync(notes, "utf8"));
+  let data = JSON.parse(fs.readFileSync(db, "utf8"));
 
   data.push(newNote);
 
@@ -28,11 +28,11 @@ api.post("/notes", (req, res) => {
 api.delete("/notes/:id", (req, res) => {
   let deleteNote = request.params.id.toString();
 
-  let data = JSON.parse(fs.readFileSync(notes, "utf8"));
+  let data = JSON.parse(fs.readFileSync(db, "utf8"));
 
   const newData = data.filter((note) => note.id.toString() !== deleteNote);
 
-  fs.writeFileSync(notes, JSON.stringify(newData));
+  fs.writeFileSync(db, JSON.stringify(newData));
 
   res.json(newData);
 });
