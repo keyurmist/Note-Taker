@@ -1,4 +1,5 @@
 const express = require("express");
+// const html = require("./routes/html");
 const html = require("./routes/html");
 const api = require("./routes/api");
 
@@ -9,8 +10,10 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", api);
-app.use("/html", html);
+// app.use("/api", api);
+// app.use("/html", html);
+require("./routes/api", api);
+require("./routes/html", html);
 
 app.use(express.static("public"));
 
