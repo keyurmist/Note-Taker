@@ -3,15 +3,12 @@ const path = require("path");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const notes = require("../Develop/db/db.json");
-const { response } = require("express");
 
-currentNote = notes.length;
-
-api.get("/api/notes", (req, res) => {
+api.get("/notes", (req, res) => {
   res.json("../Develop/db/db.json");
 });
 
-api.post("/api/notes", (req, res) => {
+api.post("/notes", (req, res) => {
   console.log(req.body);
 
   const newNote = req.body;
@@ -26,6 +23,18 @@ api.post("/api/notes", (req, res) => {
   console.log("Successfully added new note");
 
   res.json(data);
+});
+
+api.delete("/notes/:id", (req, res) => {
+  let deleteNote = request.params.id.toString();
+
+  let data = JSON.parse(fs.readFileSync(notes, "utf8"));
+
+  const newData = data.filter((note) => note.id.toString() !== deleteNote);
+
+  fs.writeFileSync(notes, JSON.stringify(newData));
+
+  res.json(newData);
 });
 
 module.exports = api;

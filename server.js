@@ -12,8 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use("/api", api);
 // app.use("/html", html);
-require("./routes/api", api);
-require("./routes/html", html);
+app.use("./routes/api", api);
+app.use("./routes/html", html);
 
 app.use(express.static("public"));
 
