@@ -25,16 +25,16 @@ api.post("/notes", (req, res) => {
   res.json(data);
 });
 
-// api.delete("/notes/:id", (req, res) => {
-//   let deleteNote = request.params.id.toString();
+api.delete("/notes/:id", (req, res) => {
+  let deleteNote = req.params.id.toString();
 
-//   let data = JSON.parse(fs.readFileSync(db, "utf8"));
+  let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
-//   const newData = data.filter((note) => note.id.toString() !== deleteNote);
+  const newData = data.filter((note) => note.id.toString() !== deleteNote);
 
-//   fs.writeFileSync(db, JSON.stringify(newData));
+  fs.writeFileSync("./db/db.json", JSON.stringify(newData));
 
-//   res.json(newData);
-// });
+  res.json(newData);
+});
 
 module.exports = api;
