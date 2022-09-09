@@ -9,7 +9,7 @@ api.get("/notes", (req, res) => {
 });
 
 api.post("/notes", (req, res) => {
-  const newNote = req.body;
+  let newNote = req.body;
   console.log(req.body);
 
   newNote.id = uuidv4();
