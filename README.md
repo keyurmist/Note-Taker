@@ -15,6 +15,8 @@
 
 This project uses express.js to create a note taker app. It allows you to write, save and delete any notes.
 
+Deployed link: https://keyur-note-taker.herokuapp.com/
+
 ## Installation
 
 Please follow the instructions on how to install the application:
